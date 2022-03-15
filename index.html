@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <title>Hawa-On</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">HAWA-ON</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/home" id="home-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#table-view" id="table-view-link">Table-View</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#map-view" id="map-view-link">Map-View</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/satellite" id="satellite-link">Satellite</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/radar" id="radar-link">Radar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="docs-link">Docs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="refresh-link"><i class="fa fa-refresh" id="refresh-icon" style="color: green; font-size: 24px;" title="Refresh Site"></i></a>
+              
+            </li>
+          </ul>
+        </div>
+        
+    </nav>
+
+    <div id="home-page" class="page">
+      <div id="motto">
+        We render Weather
+      </div>
+      <div id="home-links">
+        <ul>
+          <li id="link-to-docs">Get started</li>
+          <li id="link-to-table-view">Table view</li>
+          <li id="link-to-map-view">Map view</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="actual-data">
+    </div>
+
+    <div id="metar-table" class="page">
+      <div id="metar-table-head">
+        <div>Airport</div>
+        <div>Temperature (C)</div>
+        <div>Visibility (m)</div>
+        <div>Weather</div>
+      </div>
+    </div>
+
+    <div id="metar-brief-view" class="page">
+      <button id="detailed-button">Detailed View</button>
+      <div id="in-brief"></div>
+    </div>
+
+    <div id="map-page" class="page">
+      <div id="chartdiv"></div>
+    </div>
+    <div id="satellite-page" class="page">
+      <h1><center>Infrared</center></h1>
+      <div id="satellite-infrared"></div>
+      <br>
+      <h1><center>Water Vapour</center></h1>
+      <div id="satellite-vapour"></div>
+    </div>
+    <div id="radar-page" class="page">
+      <ul>
+        <li><button class="radar-button btn btn-success">Srinagar</button></li>
+        <li><button class="radar-button btn btn-success">Jammu</button></li>
+        <li><button class="radar-button btn btn-success">Kufri</button></li>
+        <li><button class="radar-button btn btn-success">Patiala</button></li>
+        <li><button class="radar-button btn btn-success">Mukteshwar</button></li>
+        <li><button class="radar-button btn btn-success">Delhi</button></li>
+        <li><button class="radar-button btn btn-success">Jaipur</button></li>
+        <li><button class="radar-button btn btn-success">Lucknow</button></li>
+        <li><button class="radar-button btn btn-success">Bhopal</button></li>
+        <li><button class="radar-button btn btn-success">Nagpur</button></li>
+        <li><button class="radar-button btn btn-success">Veravali</button></li>
+        <li><button class="radar-button btn btn-success">Mumbai</button></li>
+        <li><button class="radar-button btn btn-success">Goa</button></li>
+        <li><button class="radar-button btn btn-success">Hyderabad</button></li>
+        <li><button class="radar-button btn btn-success">Kochi</button></li>
+        <li><button class="radar-button btn btn-success">Thiruvanathapuram</button></li>
+        <li><button class="radar-button btn btn-success">Karaikal</button></li>
+        <li><button class="radar-button btn btn-success">Chennai</button></li>
+        <li><button class="radar-button btn btn-success">Sriharikota</button></li>
+        <li><button class="radar-button btn btn-success">Machilipatnam</button></li>
+        <li><button class="radar-button btn btn-success">Visakhapatnam</button></li>
+        <li><button class="radar-button btn btn-success">Gopalpur</button></li>
+        <li><button class="radar-button btn btn-success">Paradip</button></li>
+        <li><button class="radar-button btn btn-success">Kolkata</button></li>
+        <li><button class="radar-button btn btn-success">Agartala</button></li>
+        <li><button class="radar-button btn btn-success">Sohra</button></li>
+        <li><button class="radar-button btn btn-success">Mohanbari</button></li>
+      </ul>
+
+      <div id="Srinagar" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_srn.gif">
+      </div>
+      <div id="Jammu" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_jmu.gif">
+      </div>
+      <div id="Kufri" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_kuf.gif">
+      </div>
+      <div id="Patiala" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_ptl.gif">
+      </div>
+      <div id="Mukteshwar" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_mks.gif">
+      </div>
+      <div id="Delhi" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_dlh.gif">
+      </div>
+      <div id="Jaipur" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_jpr.gif">
+      </div>
+      <div id="Lucknow" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_lkn.gif">
+      </div>
+      <div id="Bhopal" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_bhp.gif">
+      </div>
+      <div id="Nagpur" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_ngp.gif">
+      </div>
+      <div id="Veravali" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_vrv.gif">
+      </div>
+      <div id="Mumbai" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_mum.gif">
+      </div>
+      <div id="Goa" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_goa.gif">
+      </div>
+      <div id="Hyderabad" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_hyd.gif">
+      </div>
+      <div id="Kochi" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_koc.gif">
+      </div>
+      <div id="Thiruvanathapuram" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_tvm.gif">
+      </div>
+      <div id="Karaikal" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_kkl.gif">
+      </div>
+      <div id="Chennai" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_cni.gif">
+      </div>
+      <div id="Sriharikota" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_shr.gif">
+      </div>
+      <div id="Machilipatnam" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_mpt.gif">
+      </div>
+      <div id="Visakhapatnam" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_vsk.gif">
+      </div>
+      <div id="Gopalpur" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_gop.gif">
+      </div>
+      <div id="Paradip" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_pdp.gif">
+      </div>
+      <div id="Kolkata" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_kol.gif">
+      </div>
+      <div id="Agartala" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_agt.gif">
+      </div>
+      <div id="Sohra" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_cpj.gif">
+      </div>
+      <div id="Mohanbari" class="radar-image-div">
+        <img src="https://mausam.imd.gov.in/Radar/caz_mbr.gif">
+      </div>
+    </div>
+
+    <div id="docs-page" class="page">
+    </div>
+
+    <div id="lightning-page" class="page">
+      This is lightning page
+    </div>
+
+    <div id="footer">
+      © 2022 HAWA-ON
+      <div id="contact-us">
+        Contact us at teamhawaon@gmail.com for any queries
+      </div>
+    </div>
+
+    <script src="bundle.js"></script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/worldIndiaLow.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
