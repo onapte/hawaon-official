@@ -3,6 +3,10 @@
 let metarParser = require("metar-parser");
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  window.addEventListener('beforeunload', function(e) {
+  })
+
   // All pages
   let homePage = document.querySelector("#home-page");
   let tableViewPage = document.querySelector("#metar-table");
@@ -21,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let radarLink = document.querySelector("#radar-link");
   let docsLink = document.querySelector("#docs-link");
   let refreshLink = document.querySelector('#refresh-link');
+
+  makeActiveLink(homeLink);
 
   // Links in home page
   let homeLink1 = document.querySelector("#link-to-docs");
@@ -138,7 +144,7 @@ function showDetailedView() {
         detailedDiv.innerHTML = `<h1>${decodedData[i][1]}</h1>`;
         detailedDiv.innerHTML += `<p><b>Code </b>: ${decodedData[i][2].station}</p>`;
         if (decodedData[i][2].altimeter) {
-          detailedDiv.innerHTML += `<p><b>Altimeter</b>: ${decodedData[i][2].altimeter.inches} inches </p>`;
+          detailedDiv.innerHTML += `<p><b>Pressure</b>: ${decodedData[i][2].altimeter.inches} inches / ${decodedData[i][2].altimeter.millibars} hPa </p>`;
         }
   
         if (decodedData[i][2].clouds.length > 0) {
@@ -172,9 +178,26 @@ function showDetailedView() {
         if (decodedData[i][2].weather.length > 0) {
           detailedDiv.innerHTML += `<p><b>Weather</b>: <br>`
           for (let j = 0; j < decodedData[i][2].weather.length; j++) {
-            detailedDiv.innerHTML += `${decodedData[i][2].weather[j].intensity} with ${decodedData[i][2].weather[j].obscuration} <br>`;
+            detailedDiv.innerHTML += `Intensity = ${decodedData[i][2].weather[j].intensity}`;
+            if (decodedData[i][2].weather[j].obscuration) {
+              detailedDiv.innerHTML += `, Obscuration = ${decodedData[i][2].weather[j].obscuration}`;
+            }
+            else {
+              detailedDiv.innerHTML += `, Obscuration = none`;
+            }
+
+            if (decodedData[i][2].weather[j].precipitation) {
+              detailedDiv.innerHTML += `; Precipitation expected`;
+            }
+            else {
+              detailedDiv.innerHTML += `, Precipitation = none`;
+            }
           }
           detailedDiv.innerHTML += '</p>';
+        }
+
+        if (decodedData[i][2].nosig) {
+          detailedDiv.innerHTML += '<p>No significant change expected in the next 2 hours</p>';
         }
   
         detailedParentDiv.append(detailedDiv);
@@ -259,6 +282,9 @@ let LatLongStore = [
   { latitude: 18.5204, longitude: 73.8567, title: "Pune", color: "green" },
   { latitude: 30.7333, longitude: 76.7794, title: "Chandigarh", color: "green" },
   { latitude: 22.4707, longitude: 70.0577, title: "Jamnagar", color: "green" },
+  { latitude: 26.2487, longitude: 81.3784, title: "Fursatganj", color: "green" },
+  { latitude: 29.0222, longitude: 79.4908, title: "Pantnagar", color: "green" },
+
 ];
 
 // Delete table in table view page
@@ -349,6 +375,7 @@ function showData() {
     tList = [];
   }
   showTable();
+  return false;
 }
 
 // Construct a table in table view page and load the decoded data
@@ -366,6 +393,9 @@ function showTable() {
     let vis = document.createElement("div");
     if (decodedData[row][2].weather.length > 0) {
       weather.innerText = decodedData[row][2].weather[0].obscuration;
+      if (decodedData[row][2].weather[0].precipitation) {
+        weather.innerText += ` with precipitation`;
+      }
     } else {
       weather.innerText = "No information available";
     }
@@ -386,6 +416,7 @@ function showTable() {
       }
     } else {
       vis.innerText = "No information available";
+      tableDivColor = 'rgb(0,206,209)';
     }
     tableDiv.append(airport);
     tableDiv.append(temp);
@@ -421,6 +452,9 @@ function getMap() {
 
   // Set projection
   chart.projection = new am4maps.projections.Miller();
+
+  // Chart legend
+  //chart.legend = new am4charts.Legend();
 
   // Create map polygon series
   var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
@@ -476,7 +510,7 @@ function setMarkersColor() {
             LatLongStore[i].color = "yellow";
           }
         } else {
-          LatLongStore[i].color = "blue";
+          LatLongStore[i].color = "rgb(0,206,209)";
         }
         break;
       }
@@ -675,7 +709,7 @@ const Parser = require("../parser");
 
 module.exports = class NosigParser extends Parser {
     static parse(metar) {
-        const match = ` ${metar} `.match(/\sNOSIG\s/);
+        const match = ` ${metar} `.match("NOSIG=");
 
         return {
             nosig: !!match
