@@ -66,6 +66,22 @@
     color: blueviolet;
 }
 
+#color-key {
+    margin: 0 auto;
+    font-family: 'Mulish';
+    width: 50%;
+    text-align: center;
+}
+
+.color-key-entry {
+    display: flex;
+}
+
+.color-key-entry div {
+    flex: 5;
+    border: solid 2px cadetblue;
+}
+
 #metar-table {
     font-family: 'Mulish';
     font-size: 1.5rem;
@@ -197,12 +213,17 @@
     font-family: 'Mulish';
     margin: 20px;
     margin-bottom: 60px;
+
 }
 
 .detailed {
     padding: 10px;
     font-family: 'Mulish';
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+#detailed-button {
+    margin-bottom: 60px;
 }
 
 @media screen and (max-width: 950px) {
@@ -217,6 +238,10 @@
     }
 
     .metar-table-entry, #metar-table-head {
+        font-size: 15px;
+    }
+
+    #color-key {
         font-size: 15px;
     }
 }
@@ -244,6 +269,14 @@
 
     .metar-table-entry, #metar-table-head {
         font-size: 13px;
+    }
+
+    #color-key {
+        width: 85%;
+    }
+
+    article {
+        font-size: 18px;
     }
 }
 
