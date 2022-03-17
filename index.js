@@ -382,14 +382,21 @@ function showTable() {
   let tableParentDiv = document.querySelector("#metar-table");
 
   for (let row = 0; row < decodedData.length; row++) {
+    console.log(decodedData[row]);
     let tableDiv = document.createElement("div");
     let tableDivColor = "Springgreen";
     tableDiv.className = "metar-table-entry";
     let weather = document.createElement("div");
+    let wind = document.createElement("div");
+    let time = document.createElement("div");
     let airport = document.createElement("div");
-    airport.className = "airports";
+    airport.className = "airports table-airport";
     let temp = document.createElement("div");
     let vis = document.createElement("div");
+    temp.className = "table-temp";
+    vis.className = "table-vis";
+    wind.className = "table-wind";
+    time.className = "table-time";
     if (decodedData[row][2].weather.length > 0) {
       weather.innerText = decodedData[row][2].weather[0].obscuration;
       if (decodedData[row][2].weather[0].precipitation) {
@@ -398,12 +405,24 @@ function showTable() {
     } else {
       weather.innerText = "No information available";
     }
+
+    if (decodedData[row][2].time) {
+      time.innerText = decodedData[row][2].time.date;
+    }
+
+    if (decodedData[row][2].wind.direction || decodedData[row][2].wind.speed) {
+      wind.innerText = `Direction: ${decodedData[row][2].wind.direction}, Speed: ${decodedData[row][2].wind.speedKt} Kt`;
+    }
+    else {
+      wind.innerText = "Latest info not available";
+    }
+
     airport.innerText = decodedData[row][1];
 
     if (decodedData[row][2].temperature) {
       temp.innerText = decodedData[row][2].temperature.celsius;
     } else {
-      temp.innerText = "No information available";
+      temp.innerText = "Latest info not available";
     }
 
     if (decodedData[row][2].visibility) {
@@ -414,13 +433,14 @@ function showTable() {
         tableDivColor = "yellow";
       }
     } else {
-      vis.innerText = "No information available";
+      vis.innerText = "Latest info not available";
       tableDivColor = 'rgb(0,206,209)';
     }
     tableDiv.append(airport);
     tableDiv.append(temp);
     tableDiv.append(vis);
-    tableDiv.append(weather);
+    tableDiv.append(wind);
+    tableDiv.append(time);
     tableParentDiv.appendChild(tableDiv);
     tableDiv.style.backgroundColor = tableDivColor;
   }
