@@ -1,5 +1,7 @@
 // Js package to decoder METAR code
 let metarParser = require("metar-parser");
+let controller = new AbortController();
+let signal = controller.signal;
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -127,6 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
   actualData.style.display = "none";
   getMetarData();
   //showTable();
+
+  let site = 'amssdelhi.gov.in/Palam4.php';
+  if (window.location.href.includes(site)) {
+    window.location.href = 'https://hawa-on.netlify.app/';
+  }
 });
 
 function showDetailedView() {
@@ -222,67 +229,67 @@ function getMarkdown(docsPage) {
 
 // Store Latitude and Longitude of a city along with their color key
 let LatLongStore = [
-  { latitude: 23.8315, longitude: 91.2868, title: "Agartala", color: "green" },
-  { latitude: 23.0225, longitude: 72.5714, title: "Ahmedabad", color: "green" },
-  { latitude: 25.4358, longitude: 81.8463, title: "Allahabad", color: "green" },
-  { latitude: 31.634, longitude: 74.8723, title: "Amritsar", color: "green" },
-  { latitude: 12.9716, longitude: 77.5946, title: "Bangalore", color: "green" },
-  { latitude: 22.3072, longitude: 73.1812, title: "Baroda", color: "green" },
-  { latitude: 23.2599, longitude: 77.4126, title: "Bhopal", color: "green" },
-  { latitude: 20.2961, longitude: 85.81, title: "Bhubaneswar", color: "green" },
-  { latitude: 13.0827, longitude: 80.2707, title: "Chennai", color: "green" },
-  { latitude: 11.0168, longitude: 76.9558, title: "Coimbatore", color: "green",},
-  { latitude: 6.9271, longitude: 79.8612, title: "Colombo", color: "green" },
-  { latitude: 28.7041, longitude: 77.1025, title: "Delhi", color: "green" },
-  { latitude: 30.3165, longitude: 78.0322, title: "Dehradun", color: "green" },
-  { latitude: 26.1445, longitude: 91.7362, title: "Gauhati", color: "green" },
-  { latitude: 24.7914, longitude: 85.0002, title: "Gaya", color: "green" },
-  { latitude: 15.2993, longitude: 74.124, title: "Goa", color: "green" },
-  { latitude: 17.385, longitude: 78.4867, title: "Hyderabad", color: "green" },
-  { latitude: 22.7196, longitude: 75.8577, title: "Indore", color: "green" },
-  { latitude: 23.1815, longitude: 79.9864, title: "Jabalpur", color: "green" },
-  { latitude: 26.9124, longitude: 75.7873, title: "Jaipur", color: "green" },
-  { latitude: 9.9312, longitude: 76.2673, title: "Kochi", color: "green" },
-  { latitude: 22.5726, longitude: 88.3639, title: "Kolkata", color: "green" },
-  { latitude: 11.2588, longitude: 75.7804, title: "Kozhikode ", color: "green" },
-  { latitude: 26.8467, longitude: 80.9462, title: "Lucknow", color: "green" },
-  { latitude: 9.9252, longitude: 78.1198, title: "Madurai ", color: "green" },
-  { latitude: 27.4728, longitude: 94.9120, title: "Mohanbari", color: "green" },
-  { latitude: 19.0760, longitude: 72.8777, title: "Mumbai", color: "green" },
-  { latitude: 21.1458, longitude: 79.0882, title: "Nagpur", color: "green" },
-  { latitude: 20.0997, longitude: 73.9285, title: "Ozar", color: "green" },
-  { latitude: 25.5941, longitude: 85.1376, title: "Patna", color: "green" },
-  { latitude: 32.2733, longitude: 75.6522, title: "Pathankot ", color: "green" },
-  { latitude: 21.2514, longitude: 81.6296, title: "Raipur", color: "green" },
-  { latitude: 28.5647, longitude: 77.1949, title: "Safdarjung", color: "green" },
-  { latitude: 31.1048, longitude: 77.1734, title: "Shimla", color: "green" },
-  { latitude: 21.1702, longitude: 72.8311, title: "Surat", color: "green" },
-  { latitude: 23.3441, longitude: 85.3096, title: "Ranchi", color: "green" },
-  { latitude: 10.7905, longitude: 78.7047, title: "Trichy", color: "green" },
-  { latitude: 8.5241, longitude: 76.9366, title: "Trivandrum", color: "green" },
-  { latitude: 24.5854, longitude: 73.7125, title: "Udaipur", color: "green" },
-  { latitude: 25.3176, longitude: 82.9739, title: "Varanasi", color: "green" },
-  { latitude: 17.6868, longitude: 83.2185, title: "Vizag", color: "green" },
-  { latitude: 4.1755, longitude: 73.5093, title: "Male", color: "green" },
-  { latitude: 0.6960, longitude: 73.1556, title: "Gan", color: "green" },
-  { latitude: 27.7172, longitude: 85.3240, title: "Kathmandu", color: "green" },
-  { latitude: 23.8103, longitude: 90.4125, title: "Dhaka", color: "green" },
-  { latitude: 31.5204, longitude: 74.3587, title: "Lahore", color: "green" },
-  { latitude: 34.1526, longitude: 77.5771, title: "Leh", color: "green" },
-  { latitude: 34.0837, longitude: 74.7973, title: "Sri Nagar", color: "green" },
-  { latitude: 32.7266, longitude: 74.8570, title: "Jammu", color: "green" },
-  { latitude: 26.2389, longitude: 73.0243, title: "Jodhpur", color: "green" },
-  { latitude: 26.9157, longitude: 70.9083, title: "Jaisalmer", color: "green" },
-  { latitude: 23.2859, longitude: 69.6688, title: "Bhuj-Rudra", color: "green" },
-  { latitude: 26.7606, longitude: 83.3732, title: "Gorakhpur", color: "green" },
-  { latitude: 27.1767, longitude: 78.0081, title: "Agra", color: "green" },
-  { latitude: 26.6986, longitude: 88.3117, title: "Bagdogra", color: "green" },
-  { latitude: 26.2124, longitude: 78.1772, title: "Gwalior", color: "green" },
-  { latitude: 18.5204, longitude: 73.8567, title: "Pune", color: "green" },
-  { latitude: 30.7333, longitude: 76.7794, title: "Chandigarh", color: "green" },
-  { latitude: 22.4707, longitude: 70.0577, title: "Jamnagar", color: "green" },
-  { latitude: 26.2487, longitude: 81.3784, title: "Fursatganj", color: "green" },
-  { latitude: 29.0222, longitude: 79.4908, title: "Pantnagar", color: "green" },
+  { latitude: 23.8315, longitude: 91.2868, title: "Agartala", color: "#299617" },
+  { latitude: 23.0225, longitude: 72.5714, title: "Ahmedabad", color: "#299617" },
+  { latitude: 25.4358, longitude: 81.8463, title: "Allahabad", color: "#299617" },
+  { latitude: 31.634, longitude: 74.8723, title: "Amritsar", color: "#299617" },
+  { latitude: 12.9716, longitude: 77.5946, title: "Bangalore", color: "#299617" },
+  { latitude: 22.3072, longitude: 73.1812, title: "Baroda", color: "#299617" },
+  { latitude: 23.2599, longitude: 77.4126, title: "Bhopal", color: "#299617" },
+  { latitude: 20.2961, longitude: 85.81, title: "Bhubaneswar", color: "#299617" },
+  { latitude: 13.0827, longitude: 80.2707, title: "Chennai", color: "#299617" },
+  { latitude: 11.0168, longitude: 76.9558, title: "Coimbatore", color: "#299617",},
+  { latitude: 6.9271, longitude: 79.8612, title: "Colombo", color: "#299617" },
+  { latitude: 28.7041, longitude: 77.1025, title: "Delhi", color: "#299617" },
+  { latitude: 30.3165, longitude: 78.0322, title: "Dehradun", color: "#299617" },
+  { latitude: 26.1445, longitude: 91.7362, title: "Gauhati", color: "#299617" },
+  { latitude: 24.7914, longitude: 85.0002, title: "Gaya", color: "#299617" },
+  { latitude: 15.2993, longitude: 74.124, title: "Goa", color: "#299617" },
+  { latitude: 17.385, longitude: 78.4867, title: "Hyderabad", color: "#299617" },
+  { latitude: 22.7196, longitude: 75.8577, title: "Indore", color: "#299617" },
+  { latitude: 23.1815, longitude: 79.9864, title: "Jabalpur", color: "#299617" },
+  { latitude: 26.9124, longitude: 75.7873, title: "Jaipur", color: "#299617" },
+  { latitude: 9.9312, longitude: 76.2673, title: "Kochi", color: "#299617" },
+  { latitude: 22.5726, longitude: 88.3639, title: "Kolkata", color: "#299617" },
+  { latitude: 11.2588, longitude: 75.7804, title: "Kozhikode ", color: "#299617" },
+  { latitude: 26.8467, longitude: 80.9462, title: "Lucknow", color: "#299617" },
+  { latitude: 9.9252, longitude: 78.1198, title: "Madurai ", color: "#299617" },
+  { latitude: 27.4728, longitude: 94.9120, title: "Mohanbari", color: "#299617" },
+  { latitude: 19.0760, longitude: 72.8777, title: "Mumbai", color: "#299617" },
+  { latitude: 21.1458, longitude: 79.0882, title: "Nagpur", color: "#299617" },
+  { latitude: 20.0997, longitude: 73.9285, title: "Ozar", color: "#299617" },
+  { latitude: 25.5941, longitude: 85.1376, title: "Patna", color: "#299617" },
+  { latitude: 32.2733, longitude: 75.6522, title: "Pathankot ", color: "#299617" },
+  { latitude: 21.2514, longitude: 81.6296, title: "Raipur", color: "#299617" },
+  { latitude: 28.5647, longitude: 77.1949, title: "Safdarjung", color: "#299617" },
+  { latitude: 31.1048, longitude: 77.1734, title: "Shimla", color: "#299617" },
+  { latitude: 21.1702, longitude: 72.8311, title: "Surat", color: "#299617" },
+  { latitude: 23.3441, longitude: 85.3096, title: "Ranchi", color: "#299617" },
+  { latitude: 10.7905, longitude: 78.7047, title: "Trichy", color: "#299617" },
+  { latitude: 8.5241, longitude: 76.9366, title: "Trivandrum", color: "#299617" },
+  { latitude: 24.5854, longitude: 73.7125, title: "Udaipur", color: "#299617" },
+  { latitude: 25.3176, longitude: 82.9739, title: "Varanasi", color: "#299617" },
+  { latitude: 17.6868, longitude: 83.2185, title: "Vizag", color: "#299617" },
+  { latitude: 4.1755, longitude: 73.5093, title: "Male", color: "#299617" },
+  { latitude: 0.6960, longitude: 73.1556, title: "Gan", color: "#299617" },
+  { latitude: 27.7172, longitude: 85.3240, title: "Kathmandu", color: "#299617" },
+  { latitude: 23.8103, longitude: 90.4125, title: "Dhaka", color: "#299617" },
+  { latitude: 31.5204, longitude: 74.3587, title: "Lahore", color: "#299617" },
+  { latitude: 34.1526, longitude: 77.5771, title: "Leh", color: "#299617" },
+  { latitude: 34.0837, longitude: 74.7973, title: "Sri Nagar", color: "#299617" },
+  { latitude: 32.7266, longitude: 74.8570, title: "Jammu", color: "#299617" },
+  { latitude: 26.2389, longitude: 73.0243, title: "Jodhpur", color: "#299617" },
+  { latitude: 26.9157, longitude: 70.9083, title: "Jaisalmer", color: "#299617" },
+  { latitude: 23.2859, longitude: 69.6688, title: "Bhuj-Rudra", color: "#299617" },
+  { latitude: 26.7606, longitude: 83.3732, title: "Gorakhpur", color: "#299617" },
+  { latitude: 27.1767, longitude: 78.0081, title: "Agra", color: "#299617" },
+  { latitude: 26.6986, longitude: 88.3117, title: "Bagdogra", color: "#299617" },
+  { latitude: 26.2124, longitude: 78.1772, title: "Gwalior", color: "#299617" },
+  { latitude: 18.5204, longitude: 73.8567, title: "Pune", color: "#299617" },
+  { latitude: 30.7333, longitude: 76.7794, title: "Chandigarh", color: "#299617" },
+  { latitude: 22.4707, longitude: 70.0577, title: "Jamnagar", color: "#299617" },
+  { latitude: 26.2487, longitude: 81.3784, title: "Fursatganj", color: "#299617" },
+  { latitude: 29.0222, longitude: 79.4908, title: "Pantnagar", color: "#299617" },
 
 ];
 
@@ -330,7 +337,11 @@ async function getMetarData() {
     "https://young-waters-99383.herokuapp.com/https://amssdelhi.gov.in/Palam4.php",
     {
       method: "GET",
-      
+      signal: signal,
+      headers: {
+        'connection': 'close',
+        'x-requested-with': 'GET'
+      }
     }
   )
     .then((response) => response.text())
@@ -356,6 +367,8 @@ async function getMetarData() {
       showData();
       //storeLatLong();
     });
+
+    controller.abort();
 }
 
 // Show Metar data in table view page
@@ -382,7 +395,6 @@ function showTable() {
   let tableParentDiv = document.querySelector("#metar-table");
 
   for (let row = 0; row < decodedData.length; row++) {
-    console.log(decodedData[row]);
     let tableDiv = document.createElement("div");
     let tableDivColor = "Springgreen";
     tableDiv.className = "metar-table-entry";
@@ -472,6 +484,7 @@ function getMap() {
   // Set projection
   chart.projection = new am4maps.projections.Miller();
 
+
   // Chart legend
   //chart.legend = new am4charts.Legend();
 
@@ -483,15 +496,19 @@ function getMap() {
 
   // Make map load polygon (like country names) data from GeoJSON
   polygonSeries.useGeodata = true;
+  polygonSeries.include = ['IN', 'PK', 'LK', 'NP', 'BD', 'MV'];
 
+  chart.events.on("ready", function(ev) {
+    chart.zoomToMapObject(polygonSeries.getPolygonById("IN"));
+  });
   // Configure series
   var polygonTemplate = polygonSeries.mapPolygons.template;
   polygonTemplate.tooltipText = "{name}";
-  polygonTemplate.fill = am4core.color("#66a5b2");
+  polygonTemplate.fill = am4core.color('#FFD0B9');
 
   // Create hover state and set alternative fill color
   var hs = polygonTemplate.states.create("hover");
-  hs.properties.fill = am4core.color("#6689b2");
+  hs.properties.fill = am4core.color("#FFD0B9");
 
   var imageSeries = chart.series.push(new am4maps.MapImageSeries());
 
@@ -529,7 +546,7 @@ function setMarkersColor() {
             LatLongStore[i].color = "yellow";
           }
         } else {
-          LatLongStore[i].color = "rgb(0,206,209)";
+          LatLongStore[i].color = "#2D5DA1";
         }
         break;
       }
