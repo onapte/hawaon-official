@@ -23,7 +23,7 @@
 #home-page {
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: absolute;
     top: 61px;
     text-align: center;
     background: linear-gradient(45deg, #fc00ff 0%, #00dbde 100%);
