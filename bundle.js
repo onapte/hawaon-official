@@ -383,7 +383,7 @@ function showTable() {
   let tableParentDiv = document.querySelector("#metar-table");
 
   for (let row = 0; row < decodedData.length; row++) {
-    console.log(decodedData[row]);
+    
     let tableDiv = document.createElement("div");
     let tableDivColor = "Springgreen";
     tableDiv.className = "metar-table-entry";
