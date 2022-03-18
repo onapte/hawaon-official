@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
@@ -18,25 +19,28 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#home-page" id="home-link" data-toggle="collapse" data-target=".navbar-collapse">Home</a>
+              <a class="nav-link" href="#home-page" id="home-link" data-toggle="collapse" data-target=".navbar-collapse"><img src="https://img.icons8.com/external-kmg-design-flat-kmg-design/344/external-home-contact-us-kmg-design-flat-kmg-design.png" style="height: 20px; position: relative; bottom: 3px;">
+                Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#metar-table" id="table-view-link" data-toggle="collapse" data-target=".navbar-collapse">Table-View</a>
+              <a class="nav-link" href="#metar-table" id="table-view-link" data-toggle="collapse" data-target=".navbar-collapse"><img src="https://img.icons8.com/fluency/344/table-1.png" style="height: 25px; position: relative; bottom: 2px;">
+                Table-View</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#map-page" id="map-view-link" data-toggle="collapse" data-target=".navbar-collapse">Map-View</a>
+              <a class="nav-link" href="#map-page" id="map-view-link" data-toggle="collapse" data-target=".navbar-collapse"><img src="https://img.icons8.com/external-flaticons-flat-flat-icons/344/external-map-vacation-planning-cycling-tour-flaticons-flat-flat-icons.png" style="height: 25px; position: relative; bottom: 2px;">
+                Map-View</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#satellite-page" id="satellite-link" data-toggle="collapse" data-target=".navbar-collapse">Satellite</a>
+              <a class="nav-link" href="#satellite-page" id="satellite-link" data-toggle="collapse" data-target=".navbar-collapse"><img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/344/external-satellite-news-icongeek26-linear-colour-icongeek26.png" style="height: 30px; position: relative; bottom: -1px;">Satellite</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#radar-page" id="radar-link" data-toggle="collapse" data-target=".navbar-collapse">Radar</a>
+              <a class="nav-link" href="#radar-page" id="radar-link" data-toggle="collapse" data-target=".navbar-collapse"><img src="https://img.icons8.com/color/344/radar--v1.png" style="height: 25px; position: relative; bottom: 1px;">Radar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#docs-page" id="docs-link" data-toggle="collapse" data-target=".navbar-collapse">Docs</a>
+              <a class="nav-link" href="#docs-page" id="docs-link" data-toggle="collapse" data-target=".navbar-collapse"><img src="https://img.icons8.com/dusk/344/google-docs.png" style="height: 25px; position: relative; bottom: 1px;">Docs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="refresh-link" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-refresh" id="refresh-icon" style="color: green; font-size: 24px;" title="Refresh Site"></i></a>
+              <a class="nav-link" href="#" id="refresh-link" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-refresh" id="refresh-icon" style="color: green; font-size: 24px; position: relative; top: 3px;" title="Refresh Site"></i></a>
               
             </li>
           </ul>
@@ -64,30 +68,11 @@
       <h2 id="table-header"><center>Please scroll down for detailed view</center></h2>
       <font><center><u>Color key</u></center></font>
       <br>
-      <div class="color-key-row">
-        <div id="color-red" class="color-key-row-color">Red</div>
-        <div class="color-key-row-key">
-          Visiblity <= 1000 meter <br> <b>or</b> <br> CB reported in cloud group <br> <b>or</b> <br> Thunderstorm/Thundershowers in weather
-        </div>
-      </div>
-      <div class="color-key-row">
-        <div id="color-yellow" class="color-key-row-color">Yellow</div>
-        <div class="color-key-row-key">
-          Visibility > 1000 meter <br> <b>and</b> <br> Visibility <= 1500 meter
-        </div>
-      </div>
-      <div class="color-key-row">
-        <div id="color-green" class="color-key-row-color">Green</div>
-        <div class="color-key-row-key">
-          Visibility > 1500 meter
-        </div>
-      </div>
-      <div class="color-key-row">
-        <div id="color-blue" class="color-key-row-color">Blue</div>
-        <div class="color-key-row-key">
-          Latest information not available
-        </div>
-      </div>
+
+      <p><b>Red</b>: Visibility <= 1000 meter <b>or</b> CB reported in cloud group <b>or</b> Thunderstorm/Thundershowers in weather</p>
+      <p><b>Yellow</b>: Visibility > 1000 meter <b>and</b> Visibility <= 1500 meter</p>
+      <p><b>Green</b>: Visibility > 1500 meter</p>
+      <p><b>Blue</b>: Latest information not available</p>
     
       <br>
       <font><center><u>Metar table</u></center></font>
@@ -97,13 +82,24 @@
         <div id="head-temp">Temperature (C)</div>
         <div id="head-vis">Visibility (m)</div>
         <div id="head-wind">Wind</div>
-        <div id="head-time">Time</div>
+        <div id="head-time">Clouds</div>
       </div>
     </div>
 
     <div id="metar-brief-view" class="page">
-      <button id="detailed-button">Detailed View</button>
-      <div id="in-brief"></div>
+      <button class="btn btn-outline-info" id="detailed-button">Detailed view</button>
+      <br>
+      <div id="in-brief">
+        <form class="form-inline my-2 my-lg-0" id="detailed-view-search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search by Code or Name" aria-label="Search" id="value">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          &nbsp;
+          &nbsp;
+          
+        </form>
+        <div id="image-url" style="display: none;"></div>
+        
+      </div>
     </div>
 
     <div id="map-page" class="page">
