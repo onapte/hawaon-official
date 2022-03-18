@@ -91,7 +91,7 @@
     flex: 8;
     border: solid 2px cadetblue;
     font-size: 18px;
-    height: 150px;
+    
 }
 
 #table-header {
@@ -108,8 +108,7 @@
     width: 75%;
     margin: 0 auto;
     justify-content: center;
-    flex-wrap: nowrap;
-    height: 200px;
+    flex-wrap: wrap;
 }
 
 .color-key-row-color {
@@ -129,6 +128,7 @@
     flex-direction: column;
     justify-content: center;
 }
+
 
 #color-red {
     background-color: rgb(240, 116, 116);
@@ -317,7 +317,11 @@
 }
 
 #detailed-button {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+}
+
+img {
+    height: 30px;
 }
 
 @media screen and (max-width: 1500px) {
@@ -366,6 +370,10 @@
 @media screen and (max-width: 850px) {
     #satellite-infrared, #satellite-vapour {
         height: 40rem;
+    }
+
+    p {
+        font-size: 18px;
     }
 
     #motto {
