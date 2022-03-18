@@ -19,6 +19,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let metarBriefView = document.querySelector("#metar-brief-view");
 
+  let searchBarForm = document.querySelector("#detailed-view-search");
+
+  searchBarForm.onsubmit = function(e) {
+    e.preventDefault();
+    let value = document.querySelector("#value").value.toLowerCase();
+    let paras = document.querySelectorAll('.detailed');
+    let found = 0;
+    paras.forEach(para => {
+      
+      if (para.innerText.toLowerCase().match(value)) {
+        found = 1;
+        let pos = para.getBoundingClientRect();
+        
+        window.location.hash = para.getAttribute("id");
+        javascript:window.scrollBy(0, -100);
+      }
+    })
+
+    if (!found) {
+      alert("Not found!");
+    }
+  }
+
   // All page links
   let homeLink = document.querySelector("#home-link");
   let tableViewLink = document.querySelector("#table-view-link");
@@ -54,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   refreshLink.addEventListener('click', function() {
     window.location.reload();
+    window.location.href = "https://hawa-on.netlify.app/";
+    document.querySelector("#value").value = "Search by Code or Station";
   })
 
   // Display home page
@@ -62,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //deleteTable();
     hidePagesExcept(homePage);
     makeActiveLink(homeLink);
-    metarBriefView.style.display = "block";
+    //metarBriefView.style.display = "block";
   });
 
   // Display table-view page
@@ -72,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
       makeActiveLink(tableViewLink);
       activateAirportLinks();
       metarBriefView.style.display = 'block';
+      document.querySelector("#in-brief").style.display = 'none';
       showDetailedView();
       //getMetarData();
     });
@@ -142,20 +168,24 @@ function showDetailedView() {
   let detailedParentDiv = document.querySelector('#in-brief');
   let counter = 0;
   detailedButton.onclick = function() {
+    document.querySelector("#in-brief").style.display = 'block';
     counter++;
     if (counter == 1) {
 
       for (let i = 0; i < decodedData.length; i++) {
+        
         let detailedDiv = document.createElement('div');
         detailedDiv.className = "detailed";
+        detailedDiv.setAttribute("id",`${decodedData[i][1]}`);
         detailedDiv.innerHTML = `<h1>${decodedData[i][1]}</h1>`;
-        detailedDiv.innerHTML += `<p><b>Code </b>: ${decodedData[i][2].station}</p>`;
+        
+        detailedDiv.innerHTML += `<p><b>Code </b> <img src="https://img.icons8.com/office/344/cancel-4-digits.png"> => ${decodedData[i][2].station}</p>`;
         if (decodedData[i][2].altimeter) {
-          detailedDiv.innerHTML += `<p><b>Pressure</b>: ${decodedData[i][2].altimeter.inches} inches / ${decodedData[i][2].altimeter.millibars} hPa </p>`;
+          detailedDiv.innerHTML += `<p><b>Pressure</b> <img src="https://img.icons8.com/office/344/barometer-gauge.png"> => ${decodedData[i][2].altimeter.inches} inches / ${decodedData[i][2].altimeter.millibars} hPa </p>`;
         }
   
         if (decodedData[i][2].clouds.length > 0) {
-          detailedDiv.innerHTML += `<p><b>Clouds</b>: <br>`
+          detailedDiv.innerHTML += `<p><b>Clouds</b> <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/344/external-clouds-weather-flatart-icons-outline-flatarticons-1.png"> => <br>`
           for (let j = 0; j < decodedData[i][2].clouds.length; j++) {
             detailedDiv.innerHTML += `${decodedData[i][2].clouds[j].meaning} at ${decodedData[i][2].clouds[j].altitude}m altitude <br>`;
           }
@@ -163,27 +193,27 @@ function showDetailedView() {
         }
   
         if (decodedData[i][2].dewpoint) {
-          detailedDiv.innerHTML += `<p><b>Dewpoint</b>: ${decodedData[i][2].dewpoint.celsius} °C / ${decodedData[i][2].dewpoint.fahrenheit} F </p>`;
+          detailedDiv.innerHTML += `<p><b>Dewpoint <img src="https://img.icons8.com/officexs/452/dew-point.png"></b> => ${decodedData[i][2].dewpoint.celsius} °C / ${decodedData[i][2].dewpoint.fahrenheit} F </p>`;
         }
   
         if (decodedData[i][2].temperature) {
-          detailedDiv.innerHTML += `<p><b>Temperature</b>: ${decodedData[i][2].temperature.celsius} °C / ${decodedData[i][2].temperature.fahrenheit} F </p>`;
+          detailedDiv.innerHTML += `<p><b>Temperature <img src="https://img.icons8.com/color/344/temperature--v1.png"></b> => ${decodedData[i][2].temperature.celsius} °C / ${decodedData[i][2].temperature.fahrenheit} F </p>`;
         }
   
         if (decodedData[i][2].time) {
-          detailedDiv.innerHTML += `<p><b>Time</b>: ${decodedData[i][2].time.date}</p>`;
+          detailedDiv.innerHTML += `<p><b>Time</b> <img src="https://img.icons8.com/office/344/hourglass-sand-bottom.png"> => ${decodedData[i][2].time.date}</p>`;
         }
   
         if (decodedData[i][2].visibility) {
-          detailedDiv.innerHTML += `<p><b>Visibility</b>: ${decodedData[i][2].visibility.feet} ft / ${decodedData[i][2].visibility.kilometers} km / ${decodedData[i][2].visibility.meters} m </p>`;
+          detailedDiv.innerHTML += `<p><b>Visibility <img src="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/344/external-visibility-weather-app-inipagistudio-mixed-inipagistudio.png"></b> => ${decodedData[i][2].visibility.feet} ft / ${decodedData[i][2].visibility.kilometers} km / ${decodedData[i][2].visibility.meters} m </p>`;
         }
   
         if (decodedData[i][2].wind) {
-          detailedDiv.innerHTML += `<p><b>Wind</b>: Direction = ${decodedData[i][2].wind.direction}, Speed (Kt) = ${decodedData[i][2].wind.speedKt}</p>`;
+          detailedDiv.innerHTML += `<p><b>Wind</b> <img src="https://img.icons8.com/ios/344/wind--v1.png"> => Direction = ${decodedData[i][2].wind.direction}, Speed (Kt) = ${decodedData[i][2].wind.speedKt}</p>`;
         }
   
         if (decodedData[i][2].weather.length > 0) {
-          detailedDiv.innerHTML += `<p><b>Weather</b>: <br>`
+          detailedDiv.innerHTML += `<p><b>Weather</b> <img src="https://img.icons8.com/office/344/partly-cloudy-day--v1.png"> => <br>`
           for (let j = 0; j < decodedData[i][2].weather.length; j++) {
             detailedDiv.innerHTML += `Intensity = ${decodedData[i][2].weather[j].intensity}`;
             if (decodedData[i][2].weather[j].obscuration) {
@@ -194,10 +224,10 @@ function showDetailedView() {
             }
 
             if (decodedData[i][2].weather[j].precipitation) {
-              detailedDiv.innerHTML += `; Precipitation expected`;
+              detailedDiv.innerHTML += `; Precipitation expected \n`;
             }
             else {
-              detailedDiv.innerHTML += `, Precipitation = none`;
+              detailedDiv.innerHTML += `, Precipitation = none \n`;
             }
           }
           detailedDiv.innerHTML += '</p>';
@@ -401,7 +431,7 @@ function showTable() {
     tableDiv.className = "metar-table-entry";
     let weather = document.createElement("div");
     let wind = document.createElement("div");
-    let time = document.createElement("div");
+    let clouds = document.createElement("div");
     let airport = document.createElement("div");
     airport.className = "airports table-airport";
     let temp = document.createElement("div");
@@ -409,7 +439,7 @@ function showTable() {
     temp.className = "table-temp";
     vis.className = "table-vis";
     wind.className = "table-wind";
-    time.className = "table-time";
+    clouds.className = "table-time";
     if (decodedData[row][2].weather.length > 0) {
       weather.innerText = decodedData[row][2].weather[0].obscuration;
       if (decodedData[row][2].weather[0].precipitation) {
@@ -419,8 +449,23 @@ function showTable() {
       weather.innerText = "No information available";
     }
 
-    if (decodedData[row][2].time) {
-      time.innerText = decodedData[row][2].time.date;
+    if (decodedData[row][2].clouds.length > 0) {
+      for (let j = 0; j < decodedData[row][2].clouds.length; j++) {
+        clouds.innerText += `${decodedData[row][2].clouds[j].meaning} at ${decodedData[row][2].clouds[j].altitude}m; `;
+      }
+      
+    }
+
+    else if (cleanData[row+1][2].match("NSC")) {
+      clouds.innerText = `No significant clouds`;
+    }
+
+    else if (cleanData[row+1][2].match("SKC")) {
+      clouds.innerText = `Sky clear`;
+    }
+
+    else {
+      clouds.innerText = 'Latest info not available';
     }
 
     if (decodedData[row][2].wind.direction || decodedData[row][2].wind.speed) {
@@ -430,7 +475,7 @@ function showTable() {
       wind.innerText = "Latest info not available";
     }
 
-    airport.innerText = decodedData[row][1];
+    airport.innerText = `${decodedData[row][1]}\n(${decodedData[row][2].time.date})`;
 
     if (decodedData[row][2].temperature) {
       temp.innerText = decodedData[row][2].temperature.celsius;
@@ -453,7 +498,7 @@ function showTable() {
     tableDiv.append(temp);
     tableDiv.append(vis);
     tableDiv.append(wind);
-    tableDiv.append(time);
+    tableDiv.append(clouds);
     tableParentDiv.appendChild(tableDiv);
     tableDiv.style.backgroundColor = tableDivColor;
   }
